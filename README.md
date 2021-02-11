@@ -7,7 +7,18 @@ On the extension manager, go to the upper left corner to `Load Unpacked`, click 
 Toggle the extension on and you are ready to go.
 
 ## Usage
-In the console the following function is available to you:
+In the console the following functions are available to you:
+
+| function | description |
+| -------- | ----------- |
+| teleport | teleports your avatar in a selected space |
+| getMap   | get the current map |
+| getMaps  | returns all the maps for your environment |
+| listMaps | prints all the mpas |
+
+### Details
+
+#### Teleport
 ```
 /**
  * teleports you to anywhere in gather
@@ -18,4 +29,39 @@ In the console the following function is available to you:
  */
 teleport(x, y, space)
 ```
-You can only teleport yourself
+Note: You can only teleport yourself
+
+#### getMap
+```
+/**
+ * returns the current map id
+ */
+getMap()
+```
+
+#### getMaps
+```
+/**
+ * returns all the maps and their x and y dimensions
+ */
+ getMaps()
+```
+returns:
+```
+{
+  "<mapId>": {
+    id: "<mapId>",
+    sizeX: <sizeX>,
+    sizeY: <sizeY>,
+  }
+}
+```
+
+#### listMaps
+Lists all the maps and their dimensions to the console
+```
+/**
+ * Lists all the maps and their dimensions to the console
+ */
+getMaps()
+```
