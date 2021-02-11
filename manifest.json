@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "Teleporter",
+	"version": "0.1",
+	"content_scripts": [
+		{
+			"matches":[
+				"*://gather.town/*"
+			],
+			"js": ["inject.js"],
+			"all_frames": true
+		}
+	],
+  "web_accessible_resources": ["teleport.js"],
+	"browser_action":{
+		"default_icon": "icon.png"
+	}
+}
