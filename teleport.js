@@ -11,7 +11,7 @@ function wrapper(fn) {
 /**
  * teleports the user to the designated location
  */
-function teleport(x, y, sace) {
+function teleport(x, y, space) {
   wrapper((gameSpace) => {
     if(!space) space = gameSpace.mapId || undefined; // set space to current space if undefined
     gameSpace.teleport(x,y,space)
