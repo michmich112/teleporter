@@ -19,6 +19,20 @@ function teleport(x, y, space) {
 }
 
 /**
+ * Get the current possiton as an object of the form
+ * {
+ *  x: int,
+ *  y: int
+ * }
+ */
+function position() {
+  wrapper((gameSpace) => {
+    const currentState = gameSpace.gameState[gameSpace.id]
+    return {x: currentState.x, y: currentState.y}
+  })
+}
+
+/**
  * Get the current map
  */
 function getMap() {

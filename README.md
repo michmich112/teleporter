@@ -1,5 +1,5 @@
 # Teleporter
-A gather.town teleporter extension which gives the possibility to users to use a `teleport(x, y, space)` command in the console.
+A gather.town teleporter extension which gives the possibility to users to use special commands in the console.
 
 ## Installation
 Copy or clone the repo, then open chrome and go to [chrome://extensions/](chrome://extensions/) which will bring you to the extension manager page.
@@ -11,25 +11,13 @@ In the console the following functions are available to you:
 
 | function | description |
 | -------- | ----------- |
-| teleport | teleports your avatar in a selected space |
 | getMap   | get the current map |
 | getMaps  | returns all the maps for your environment |
 | listMaps | prints all the mpas |
+| position | get the current position |
+| teleport | teleports your avatar in a selected space |
 
 ### Details
-
-#### Teleport
-```
-/**
- * teleports you to anywhere in gather
- * @param x {int}         : x position to teleport to on the space
- * @param y {int}         : y position to teleport to on the space
- * @param space {string}  : (optional) space to teleport to, 
- *                          if omitted teleport to the desired coordinates in the current space
- */
-teleport(x, y, space)
-```
-Note: You can only teleport yourself
 
 #### getMap
 ```
@@ -65,3 +53,25 @@ Lists all the maps and their dimensions to the console
  */
 getMaps()
 ```
+
+#### position
+Get the current position
+```
+/**
+ * Get the current poisition
+ */
+position()
+```
+
+#### Teleport
+```
+/**
+ * teleports you to anywhere in gather
+ * @param x {int}         : x position to teleport to on the space
+ * @param y {int}         : y position to teleport to on the space
+ * @param space {string}  : (optional) space to teleport to, 
+ *                          if omitted teleport to the desired coordinates in the current space
+ */
+teleport(x, y, space)
+```
+Note: You can only teleport yourself
