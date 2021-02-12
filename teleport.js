@@ -71,3 +71,49 @@ function getMaps() {
 function listMaps() {
   console.table(getMaps())
 }
+
+/* returns an array of players online
+ * [
+ *   {
+ *      id: <player id>
+ *      name: <player name>
+ *      map: <player current map name>
+ *      x: <position X>
+ *      y: <position Y>
+ *   }
+ * ]
+ */
+function getPlayers() {
+  let players = []
+  wrapper((gameSpace) => {
+    players = Object.keys(gameSpace.gameState)
+      .map(id => {
+        const p = gameSpace.gameState[id]
+        return {
+          id,
+          name: p.name,
+          map: p.map,
+          x: p.x,
+          y: p.y,
+        }
+      })
+  })
+  return players
+}
+
+/**
+ * teleports the user to the players name or id if it exists
+ */
+function teleportToPlayer(name) {
+  const players = getPlayers()
+  const selectedPlayer = players.find(p => p.id === name) || players.find(p => p.name === name)
+  if (!selectedPlayer) console.error(`Cannot find player ${name}`)
+  teleport(selectedPlayer.x, selectedPlayer.y, selectedPlayer.map)
+}
+
+/**
+ * lists online players in console
+ */
+function listPlayers() {
+  console.table(getPlayers())
+}
