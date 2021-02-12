@@ -9,13 +9,16 @@ Toggle the extension on and you are ready to go.
 ## Usage
 In the console the following functions are available to you:
 
-| function | description |
-| -------- | ----------- |
-| getMap   | get the current map |
-| getMaps  | returns all the maps for your environment |
-| listMaps | prints all the mpas |
-| position | get the current position |
-| teleport | teleports your avatar in a selected space |
+| function         | description                               |
+| ---------------- | ----------------------------------------- |
+| getMap           | get the current map                       |
+| getMaps          | returns all the maps for your environment |
+| getPlayers       | teleports your avatar in a selected space |
+| listMaps         | prints all the mpas                       |
+| listPlayers      | teleports your avatar in a selected space |
+| position         | get the current position                  |
+| teleport         | teleports your avatar in a selected space |
+| teleportToPlayer | teleports your avatar in a selected space |
 
 ### Details
 
@@ -45,6 +48,27 @@ returns:
 }
 ```
 
+#### getPlayers
+```
+/**
+ * returns an array of players online
+ */
+ getPlayers()
+```
+returns:
+```
+[
+  {
+    id: <player id>
+    name: <player name>
+    map: <player current map name>
+    x: <position X>
+    y: <position Y>
+  }
+]
+```
+
+
 #### listMaps
 Lists all the maps and their dimensions to the console
 ```
@@ -52,6 +76,15 @@ Lists all the maps and their dimensions to the console
  * Lists all the maps and their dimensions to the console
  */
 getMaps()
+```
+
+#### listPlayers
+Lists online players to the console
+```
+/**
+ * Lists online players to the console
+ */
+listPlayers()
 ```
 
 #### position
@@ -75,3 +108,14 @@ position()
 teleport(x, y, space)
 ```
 Note: You can only teleport yourself
+
+#### Teleport to player
+```
+/**
+ * teleports you to an online player
+ * @param name {string}         : the name or the id of the player you want to teleport to
+ */
+teleportToPlayer(name)
+```
+Note: The player must be online
+
