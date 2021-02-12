@@ -26,10 +26,16 @@ function teleport(x, y, space) {
  * }
  */
 function position() {
+  let position
   wrapper((gameSpace) => {
     const currentState = gameSpace.gameState[gameSpace.id]
-    return {x: currentState.x, y: currentState.y}
+    position = {x: currentState.x, y: currentState.y}
   })
+  return position
+}
+
+function getPosition() {
+
 }
 
 /**
