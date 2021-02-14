@@ -9,16 +9,17 @@ Toggle the extension on and you are ready to go.
 ## Usage
 In the console the following functions are available to you:
 
-| function         | description                               |
-| ---------------- | ----------------------------------------- |
-| getMap           | get the current map                       |
-| getMaps          | returns all the maps for your environment |
-| getPlayers       | teleports your avatar in a selected space |
-| listMaps         | prints all the mpas                       |
-| listPlayers      | teleports your avatar in a selected space |
-| position         | get the current position                  |
-| teleport         | teleports your avatar in a selected space |
-| teleportToPlayer | teleports your avatar in a selected space |
+| function           | description                               |
+| ----------------   | ----------------------------------------- |
+| getMap             | get the current map                       |
+| getMaps            | returns all the maps for your environment |
+| getPlayers         | teleports your avatar in a selected space |
+| listMaps           | prints all the mpas                       |
+| listPlayers        | teleports your avatar in a selected space |
+| position           | get the current position                  |
+| teleport           | teleports your avatar in a selected space |
+| teleportToPlayer   | teleports your avatar in a selected space |
+| teleportToSpawn    | teleports your avatar in a selected space |
 
 ### Details
 
@@ -119,3 +120,12 @@ teleportToPlayer(name)
 ```
 Note: The player must be online
 
+#### Teleport to map's spawn location
+```
+/**
+ * teleports you to a map's spawn location
+ * @param mapId {string}         : the id of the map you want to teleport to
+ */
+teleportToSpawn(mapId)
+```
+Note: The map ID must be valid

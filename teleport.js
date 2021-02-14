@@ -118,6 +118,23 @@ function teleportToPlayer(name) {
 }
 
 /**
+ * teleports the user to the map's spawn location if it exists
+ */
+function teleportToSpawn(mapId) {
+  let maps = []
+  wrapper((gameSpace) => {
+    maps = gameSpace.maps
+    const selectedMap = maps[mapId]
+    if (!selectedMap) {
+      console.error(`Cannot find map with id ${mapId}`)
+      return
+    }
+    const spawns = selectedMap.spawns
+    teleport(spawns[0].x, spawns[0].y, mapId)
+  })
+}
+
+/**
  * lists online players in console
  */
 function listPlayers() {
