@@ -117,6 +117,7 @@ position()
 
 Go to the first toilet found on the current map.
 Displays an error message if no toilets are found.
+Note: the name of your custom toilet object must includet the word `Toilet` (case sensitive)
 ```
 /**
  * teleports you to the first toilet found
