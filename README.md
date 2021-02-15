@@ -20,6 +20,7 @@ In the console the following functions are available to you:
 | listMaps         | prints all the mpas                                        |
 | listPlayers      | teleports your avatar in a selected space                  |
 | position         | get the current position                                   |
+| shit             | go to a toilet on the current map                          |
 | teleport         | teleports your avatar in a selected space                  |
 | teleportToPlayer | teleports your avatar in a selected space                  |
 | teleportToSpawn  | teleports your avatar to a selected space's spawn location |
@@ -110,6 +111,17 @@ Get the current position
  * Get the current poisition
  */
 position()
+```
+
+#### shit
+
+Go to the first toilet found on the current map.
+Displays an error message if no toilets are found.
+```
+/**
+ * teleports you to the first toilet found
+ */
+shit()
 ```
 
 #### Teleport

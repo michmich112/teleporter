@@ -140,3 +140,17 @@ function teleportToSpawn(mapId) {
 function listPlayers() {
   console.table(getPlayers())
 }
+
+/**
+ * teleports the user to the first toilet found in the current room
+ */
+function shit() {
+  let toilets;
+  wrapper((gameSpace) => {
+    toilets = gameSpace.maps[gameSpace.mapId].objects.filter(o => o.normal.includes(
+      "https://cdn.gather.town/v0/b/gather-town.appspot.com/o/uploads%2FjfB2mvEPtaZ7Nwmk%2Fassets%2F7dc0658b-b5a9-4aa8-9461-ddc5522c16ad"
+    ));
+  })
+  if (toilets.length < 1) console.error("No toilets found on the current map.");
+  teleport(toilets[0].x, toilets[0].y)
+}
