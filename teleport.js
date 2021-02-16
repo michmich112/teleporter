@@ -9,6 +9,22 @@ function wrapper(fn) {
 }
 
 /**
+ * teleports n time around the map
+ * @param n: number : number of time to teleport around the map
+ * @param delay: number: (optional) number of ms between each teleport (defaults to 690)
+ */
+function breakAnkles(n, delay) {
+  let dim // dimensions of the current map
+  wrapper(gameSpace => {
+    [x,y] = gameSpace.maps[gameSpace.mapId].dimensions
+    dim = {x,y}
+  })
+  for (let i=0; i<n; i++) {
+    setTimeout(()=>teleport(Math.round(Math.random()*dim.x), Math.round(Math.random()*dim.y)), (delay ?? 690)*i)
+  }
+}
+
+/**
  * teleports the user to the designated location
  */
 function teleport(x, y, space) {

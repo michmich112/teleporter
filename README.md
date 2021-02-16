@@ -14,6 +14,7 @@ In the console the following functions are available to you:
 
 | function         | description                                                |
 | ---------------- | ---------------------------------------------------------- |
+| breakAnkles      | teleport around the map and break your coworker's ankles   |
 | getMap           | get the current map                                        |
 | getMaps          | returns all the maps for your environment                  |
 | getPlayers       | teleports your avatar in a selected space                  |
@@ -26,6 +27,16 @@ In the console the following functions are available to you:
 | teleportToSpawn  | teleports your avatar to a selected space's spawn location |
 
 ### Details
+
+#### breakAnkles
+```
+/**
+ * teleports n time around the map
+ * @param n: number : number of time to teleport around the map
+ * @param delay: number: (optional) number of ms between each teleport (defaults to 690)
+ */
+breakAnkles(n, delay)
+```
 
 #### getMap
 
