@@ -19,7 +19,7 @@ jobs:
           node-version: '12'
 
       - name: Bump Version
-        uses: michmich112/version-bumper@v1.0.4
+        uses: michmich112/version-bumper@v1.0.5
         with:
           options-file: "./versioning-conf.json"
           github-token: ${{ secrets.GITHUB_TOKEN }}
