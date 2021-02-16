@@ -153,3 +153,31 @@ function shit() {
   if (toilets.length < 1) console.error("No toilets found on the current map.");
   teleport(toilets[0].x, toilets[0].y)
 }
+
+/*
+ * teleports the user to an available seat at the big bar.
+ */
+function shot() {
+  let barStools;
+  wrapper((gameSpace) => {
+    barStools = gameSpace.maps["big-bar"].objects.filter(o => (o._name || '').includes("bar-stool"));
+    if (barStools.length < 1) console.error("No bar stools found.");
+    const currentPlayersAtBar = getPlayers().filter(p => p.map === "big-bar");
+    barStools.forEach((s, seatIndex) => {
+      const playerAtSeat = currentPlayersAtBar.filter(p => p.x === s.x && p.y === s.y)[0]
+      if (playerAtSeat) barStools[seatIndex].occupied = true;
+    })
+    let availableBarStoolsIndexes = [];
+    for (let i = 0; i < barStools.length; i++) {
+      if (!barStools[i].occupied) {
+        availableBarStoolsIndexes.push(i+1)
+      }
+    }
+    const selectedStoolIndex = prompt(`Which seat would you like to take? Available seats: ${availableBarStoolsIndexes.join(', ')}`);
+    if (!barStools[selectedStoolIndex-1]) {
+      alert("Seat isn't valid.");
+    } else {
+      teleport(barStools[selectedStoolIndex-1].x, barStools[selectedStoolIndex-1].y, "big-bar")
+    }
+  })
+}
