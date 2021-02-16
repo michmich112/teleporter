@@ -108,7 +108,7 @@ Get the current position
 
 ```
 /**
- * Get the current poisition
+ * Get the current poisition and map Id
  */
 position()
 ```

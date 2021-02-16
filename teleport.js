@@ -18,24 +18,26 @@ function teleport(x, y, space) {
   })
 }
 
+
+function home() {
+
+}
+
 /**
  * Get the current possiton as an object of the form
  * {
  *  x: int,
- *  y: int
+ *  y: int,
+ *  mapId: string
  * }
  */
 function position() {
   let position
   wrapper((gameSpace) => {
-    const currentState = gameSpace.gameState[gameSpace.id]
-    position = {x: currentState.x, y: currentState.y}
+    const {x,y} = gameSpace.gameState[gameSpace.id]
+    position = {x, y, mapId: gameSpace.mapId}
   })
   return position
-}
-
-function getPosition() {
-
 }
 
 /**
@@ -139,6 +141,13 @@ function teleportToSpawn(mapId) {
  */
 function listPlayers() {
   console.table(getPlayers())
+}
+
+/**
+ * Set your desk location to your current position
+ */ 
+function setDesk() {
+
 }
 
 /**
