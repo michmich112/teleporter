@@ -200,8 +200,8 @@ function setDesk() {
  * NOTE: You must save your custom toilet object with the word Toilet in it
  */
 function shit() {
-  const mapsWithToilets = getMapsWithItemName("Toilet");
-  const mapIdsWithIndexes = mapsWithToilets.map((m, idx) => `${idx}: ${m.id}`);
+  const mapsWithShitters = getMapsWithItemName("Toilet");
+  const mapIdsWithIndexes = mapsWithShitters.map((m, idx) => `${idx}: ${m.id}`);
   const selectedMapIdOrIndex = prompt(
     `In which room would you like to go to the bathroom? Enter index or name. \nAvailable rooms:\n${mapIdsWithIndexes.join(
       "\n"
@@ -210,9 +210,9 @@ function shit() {
 
   // get map
   const selectedMap =
-    mapsWithToilets[selectedMapIdOrIndex] ||
-    mapsWithToilets[
-      mapsWithToilets.findIndex(m => m.id === selectedMapIdOrIndex)
+    mapsWithShitters[selectedMapIdOrIndex] ||
+    mapsWithShitters[
+      mapsWithShitters.findIndex(m => m.id === selectedMapIdOrIndex)
     ];
   if (!selectedMap) {
     console.error("Your input is invalid.");
@@ -220,10 +220,10 @@ function shit() {
   }
 
   // get toilets
-  const toilets = selectedMap.objects.filter(o =>
+  const shitters = selectedMap.objects.filter(o =>
     (o._name || "").includes("Toilet")
   );
-  if (toilets.length < 1) {
+  if (shitters.length < 1) {
     console.error("Map doesn't have a bathroom.");
   }
 
@@ -231,29 +231,29 @@ function shit() {
   const currentPlayersInMap = getPlayers().filter(
     p => p.map === selectedMap.id
   );
-  toilets.forEach((t, toiletSeatIndex) => {
-    const playerAtSeat = currentPlayersInMap.filter(
-      p => p.x === t.x && p.y === t.y
+  shitters.forEach((s, shitterIndex) => {
+    const playerTakingAShit = currentPlayersInMap.filter(
+      p => p.x === s.x && p.y === s.y
     )[0];
-    toilets[toiletSeatIndex].occupied = playerAtSeat;
+    shitters[shitterIndex].occupied = playerTakingAShit;
   });
-  let availableToiletSeatsIndexes = [];
-  for (let i = 0; i < toilets.length; i++) {
-    if (!toilets[i].occupied) {
-      availableToiletSeatsIndexes.push(i + 1);
+  let availableShitterIndexes = [];
+  for (let i = 0; i < shitters.length; i++) {
+    if (!shitters[i].occupied) {
+      availableShitterIndexes.push(i + 1);
     }
   }
-  const selectedToiletSeatIndex = prompt(
-    `Which seat would you like to take?\nAvailable seats: ${availableToiletSeatsIndexes.join(
+  const selectedShitterIndex = prompt(
+    `Which seat would you like to take?\nAvailable seats: ${availableShitterIndexes.join(
       ", "
     )}`
   );
-  if (!toilets[selectedToiletSeatIndex - 1]) {
+  if (!shitters[selectedShitterIndex - 1]) {
     alert("Toilet isn't valid.");
   } else {
     teleport(
-      toilets[selectedToiletSeatIndex - 1].x,
-      toilets[selectedToiletSeatIndex - 1].y,
+      shitters[selectedShitterIndex - 1].x,
+      shitters[selectedShitterIndex - 1].y,
       selectedMap.id
     );
   }
