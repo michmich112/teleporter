@@ -165,7 +165,11 @@ function shot() {
     const currentPlayersAtBar = getPlayers().filter(p => p.map === "big-bar");
     barStools.forEach((s, seatIndex) => {
       const playerAtSeat = currentPlayersAtBar.filter(p => p.x === s.x && p.y === s.y)[0]
-      if (playerAtSeat) barStools[seatIndex].occupied = true;
+      if (playerAtSeat) {
+        barStools[seatIndex].occupied = true;
+      } else {
+        barStools[seatIndex].occupied = false;
+      }
     })
     let availableBarStoolsIndexes = [];
     for (let i = 0; i < barStools.length; i++) {
