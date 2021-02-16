@@ -12,26 +12,28 @@ Toggle the extension on and you are ready to go.
 
 In the console the following functions are available to you:
 
-| function         | description                                                |
-| ---------------- | ---------------------------------------------------------- |
-| breakAnkles      | teleport around the map and break your coworker's ankles   |
-| desk             | teleport to your desk position                             |
-| getMap           | get the current map                                        |
-| getMaps          | returns all the maps for your environment                  |
-| getPlayers       | teleports your avatar in a selected space                  |
-| listMaps         | prints all the mpas                                        |
-| listPlayers      | teleports your avatar in a selected space                  |
-| position         | get the current position                                   |
-| setDesk          | save current position as desk position                     |
-| shit             | go to a toilet on the current map                          |
-| teleport         | teleports your avatar in a selected space                  |
-| teleportToPlayer | teleports your avatar in a selected space                  |
-| teleportToSpawn  | teleports your avatar to a selected space's spawn location |
-| shot             | teleports your avatar to an available seat at the big bar  |
+| function            | description                                                |
+| ------------------- | ---------------------------------------------------------- |
+| breakAnkles         | teleport around the map and break your coworker's ankles   |
+| desk                | teleport to your desk position                             |
+| getMap              | get the current map                                        |
+| getMaps             | returns all the maps for your environment                  |
+| getPlayers          | teleports your avatar in a selected space                  |
+| listMaps            | prints all the mpas                                        |
+| listPlayers         | teleports your avatar in a selected space                  |
+| position            | get the current position                                   |
+| setDesk             | save current position as desk position                     |
+| getMapsWithItemName | get maps containing object(s) with a certain name          |
+| shit                | go to a toilet on the current map                          |
+| teleport            | teleports your avatar in a selected space                  |
+| teleportToPlayer    | teleports your avatar in a selected space                  |
+| teleportToSpawn     | teleports your avatar to a selected space's spawn location |
+| shot                | teleports your avatar to an available seat at the big bar  |
 
 ### Details
 
 #### breakAnkles
+
 ```
 /**
  * teleports n time around the map
@@ -45,6 +47,7 @@ breakAnkles(n, delay)
 
 Teleport to your desks position
 Note: must have set your desk's position beforehand using the `setDesk()` function.
+
 ```
 /**
  * teleport to your desk's position
@@ -139,8 +142,10 @@ position()
 ```
 
 #### setDesk
+
 Set your current position as your desks position.
 Note: you only need to set it once as it persists on local storage
+
 ```
 /**
  * Set your current position as your desks position
@@ -208,4 +213,3 @@ Note: The map ID must be valid
  */
 shot()
 ```
-

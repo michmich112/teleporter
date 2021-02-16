@@ -134,6 +134,23 @@ function getPlayers() {
   return players
 }
 
+/*
+ * get maps containing an item with a certain name.
+ */
+function getMapsWithItemName(itemName) {
+  let mapsWithItemName = [];
+  wrapper((gameSpace) => {
+    const mapKeys = Object.keys(gameSpace.maps);
+    const maps = gameSpace.maps;
+    mapKeys.forEach(key => {
+      if (maps[key].objects.filter(o => (o._name || '').includes(itemName)).length > 0) {
+        mapsWithItemName.push(gameSpace.maps[key]);
+      }
+    })
+  })
+  return mapsWithItemName;
+}
+
 /**
  * teleports the user to the players name or id if it exists
  */
@@ -192,33 +209,67 @@ function shit() {
 }
 
 /*
- * teleports the user to an available seat at the big bar.
+ * teleports the user to an available seat at a bar of their choice.
  */
 function shot() {
-  let barStools;
-  wrapper((gameSpace) => {
-    barStools = gameSpace.maps["big-bar"].objects.filter(o => (o._name || '').includes("bar-stool"));
-    if (barStools.length < 1) console.error("No bar stools found.");
-    const currentPlayersAtBar = getPlayers().filter(p => p.map === "big-bar");
-    barStools.forEach((s, seatIndex) => {
-      const playerAtSeat = currentPlayersAtBar.filter(p => p.x === s.x && p.y === s.y)[0]
-      if (playerAtSeat) {
-        barStools[seatIndex].occupied = true;
-      } else {
-        barStools[seatIndex].occupied = false;
-      }
-    })
-    let availableBarStoolsIndexes = [];
-    for (let i = 0; i < barStools.length; i++) {
-      if (!barStools[i].occupied) {
-        availableBarStoolsIndexes.push(i+1)
-      }
+  const mapsWithBarStools = getMapsWithItemName("bar-stool");
+  const mapIdsWithIndexes = mapsWithBarStools.map(
+    (m, idx) => `${idx}: ${m.id}`
+  );
+  const selectedMapIdOrIndex = prompt(
+    `Which bar would you like to go to? Enter index or name. \nAvailable bars:\n${mapIdsWithIndexes.join(
+      "\n"
+    )}`
+  );
+
+  // get map
+  const selectedMap =
+    mapsWithBarStools[selectedMapIdOrIndex] ||
+    mapsWithBarStools[
+      mapsWithBarStools.findIndex(m => m.id === selectedMapIdOrIndex)
+    ];
+  if (!selectedMap) {
+    console.error("Your input is invalid.");
+    return;
+  }
+
+  // get bar stools
+  const barStools = selectedMap.objects.filter(o =>
+    (o._name || "").includes("bar-stool")
+  );
+  if (barStools.length < 1) {
+    console.error("Map doesn't have a bar.");
+    return;
+  }
+
+  // get non-occupied bar stools
+  const currentPlayersAtBar = getPlayers().filter(
+    p => p.map === selectedMap.id
+  );
+  barStools.forEach((s, seatIndex) => {
+    const playerAtSeat = currentPlayersAtBar.filter(
+      p => p.x === s.x && p.y === s.y
+    )[0];
+    barStools[seatIndex].occupied = playerAtSeat;
+  });
+  let availableBarStoolsIndexes = [];
+  for (let i = 0; i < barStools.length; i++) {
+    if (!barStools[i].occupied) {
+      availableBarStoolsIndexes.push(i + 1);
     }
-    const selectedStoolIndex = prompt(`Which seat would you like to take? Available seats: ${availableBarStoolsIndexes.join(', ')}`);
-    if (!barStools[selectedStoolIndex-1]) {
-      alert("Seat isn't valid.");
-    } else {
-      teleport(barStools[selectedStoolIndex-1].x, barStools[selectedStoolIndex-1].y, "big-bar")
-    }
-  })
+  }
+  const selectedStoolIndex = prompt(
+    `Which seat would you like to take?\nAvailable seats: ${availableBarStoolsIndexes.join(
+      ", "
+    )}`
+  );
+  if (!barStools[selectedStoolIndex - 1]) {
+    alert("Seat isn't valid.");
+  } else {
+    teleport(
+      barStools[selectedStoolIndex - 1].x,
+      barStools[selectedStoolIndex - 1].y,
+      selectedMap.id
+    );
+  }
 }
