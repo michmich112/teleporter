@@ -27,6 +27,7 @@ In the console the following functions are available to you:
 | teleport         | teleports your avatar in a selected space                  |
 | teleportToPlayer | teleports your avatar in a selected space                  |
 | teleportToSpawn  | teleports your avatar to a selected space's spawn location |
+| shot             | teleports your avatar to an available seat at the big bar  |
 
 ### Details
 
@@ -152,6 +153,7 @@ setDesk()
 Go to the first toilet found on the current map.
 Displays an error message if no toilets are found.
 Note: the name of your custom toilet object must includet the word `Toilet` (case sensitive)
+
 ```
 /**
  * teleports you to the first toilet found
@@ -197,3 +199,13 @@ teleportToSpawn(mapId)
 ```
 
 Note: The map ID must be valid
+
+#### Teleport to an available seat at the big bar
+
+```
+/**
+ * teleports you to the big bar at an available bar seat of your choice
+ */
+shot()
+```
+
