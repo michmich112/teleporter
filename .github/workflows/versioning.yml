@@ -1,0 +1,25 @@
+name: Update Version
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    branches:
+      - master
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Bump Version
+        uses: michmich112/version-bumper@v1.0.4
+        with:
+          options-file: "./versioning-conf.json"
+          github-token: ${{ secrets.GITHUB_TOKEN }}

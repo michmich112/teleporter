@@ -1,0 +1,20 @@
+{
+  "scheme": "custom",
+  "schemeDefinition": "major.minor.build",
+  "versionFile": "./manifest.json",
+  "files": [],
+  "rules": [
+    {
+      "trigger": "commit",
+      "branch": "master",
+      "bump": "build"
+    },
+    {
+      "trigger": "manual",
+      "branch": "master",
+      "bump": "minor",
+      "reset": "build",
+      "tag": true
+    }
+  ]
+}
