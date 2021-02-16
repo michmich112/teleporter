@@ -14,6 +14,7 @@ In the console the following functions are available to you:
 
 | function         | description                                                |
 | ---------------- | ---------------------------------------------------------- |
+| breakAnkles      | teleport around the map and break your coworker's ankles   |
 | desk             | teleport to your desk poisition                            |
 | getMap           | get the current map                                        |
 | getMaps          | returns all the maps for your environment                  |
@@ -29,7 +30,18 @@ In the console the following functions are available to you:
 
 ### Details
 
+#### breakAnkles
+```
+/**
+ * teleports n time around the map
+ * @param n: number : number of time to teleport around the map
+ * @param delay: number: (optional) number of ms between each teleport (defaults to 690)
+ */
+breakAnkles(n, delay)
+```
+
 #### desk
+
 Teleport to your desks position
 Note: must have set your desk's position beforehand using the `setDesk()` function.
 ```
