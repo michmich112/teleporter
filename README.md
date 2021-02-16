@@ -15,12 +15,14 @@ In the console the following functions are available to you:
 | function         | description                                                |
 | ---------------- | ---------------------------------------------------------- |
 | breakAnkles      | teleport around the map and break your coworker's ankles   |
+| desk             | teleport to your desk position                             |
 | getMap           | get the current map                                        |
 | getMaps          | returns all the maps for your environment                  |
 | getPlayers       | teleports your avatar in a selected space                  |
 | listMaps         | prints all the mpas                                        |
 | listPlayers      | teleports your avatar in a selected space                  |
 | position         | get the current position                                   |
+| setDesk          | save current position as desk position                     |
 | shit             | go to a toilet on the current map                          |
 | teleport         | teleports your avatar in a selected space                  |
 | teleportToPlayer | teleports your avatar in a selected space                  |
@@ -36,6 +38,17 @@ In the console the following functions are available to you:
  * @param delay: number: (optional) number of ms between each teleport (defaults to 690)
  */
 breakAnkles(n, delay)
+```
+
+#### desk
+
+Teleport to your desks position
+Note: must have set your desk's position beforehand using the `setDesk()` function.
+```
+/**
+ * teleport to your desk's position
+ */
+desk()
 ```
 
 #### getMap
@@ -119,9 +132,19 @@ Get the current position
 
 ```
 /**
- * Get the current poisition
+ * Get the current poisition and map Id
  */
 position()
+```
+
+#### setDesk
+Set your current position as your desks position.
+Note: you only need to set it once as it persists on local storage
+```
+/**
+ * Set your current position as your desks position
+ */
+setDesk()
 ```
 
 #### shit
