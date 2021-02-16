@@ -18,9 +18,18 @@ function teleport(x, y, space) {
   })
 }
 
-
-function home() {
-
+/**
+ * teleport to your desk
+ * Note: you must have first set your desk position with the `setDesk()` function
+ */
+function desk() {
+  const desk = window.localStorage.getItem("desk")
+  if(!desk){
+    console.error("Desk not set use the setDesk() function")
+    return
+  }
+  const {x, y, mapId}= JSON.parse(desk);
+  teleport(x, y, mapId)
 }
 
 /**
@@ -147,7 +156,8 @@ function listPlayers() {
  * Set your desk location to your current position
  */ 
 function setDesk() {
-
+  const pos = position()
+  window.localStorage.setItem("desk", JSON.stringify(pos))
 }
 
 /**
@@ -159,6 +169,8 @@ function shit() {
   wrapper((gameSpace) => {
     toilets = gameSpace.maps[gameSpace.mapId].objects.filter(o => (o._name || '').includes("Toilet"));
   })
-  if (toilets.length < 1) console.error("No toilets found on the current map.");
+  if (toilets.length < 1) {
+    console.error("No toilets found on the current map.");
+  }
   teleport(toilets[0].x, toilets[0].y)
 }

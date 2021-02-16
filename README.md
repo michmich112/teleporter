@@ -14,18 +14,30 @@ In the console the following functions are available to you:
 
 | function         | description                                                |
 | ---------------- | ---------------------------------------------------------- |
+| desk             | teleport to your desk poisition                            |
 | getMap           | get the current map                                        |
 | getMaps          | returns all the maps for your environment                  |
 | getPlayers       | teleports your avatar in a selected space                  |
 | listMaps         | prints all the mpas                                        |
 | listPlayers      | teleports your avatar in a selected space                  |
 | position         | get the current position                                   |
+| setDesk          | save current position as desk poisition                    |
 | shit             | go to a toilet on the current map                          |
 | teleport         | teleports your avatar in a selected space                  |
 | teleportToPlayer | teleports your avatar in a selected space                  |
 | teleportToSpawn  | teleports your avatar to a selected space's spawn location |
 
 ### Details
+
+#### desk
+Teleport to your desks position
+Note: must have set your desk's position beforehand using the `setDesk()` function.
+```
+/**
+ * teleport to your desk's positition
+ */
+desk()
+```
 
 #### getMap
 
@@ -111,6 +123,16 @@ Get the current position
  * Get the current poisition and map Id
  */
 position()
+```
+
+#### setDesk
+Set your current position as your desks position.
+Note: you only need to set it once as it persists on local storage
+```
+/**
+ * Set your current position as your desks position
+ */
+setDesk()
 ```
 
 #### shit
