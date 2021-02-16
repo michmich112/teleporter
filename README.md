@@ -12,23 +12,23 @@ Toggle the extension on and you are ready to go.
 
 In the console the following functions are available to you:
 
-| function            | description                                                |
-| ------------------- | ---------------------------------------------------------- |
-| breakAnkles         | teleport around the map and break your coworker's ankles   |
-| desk                | teleport to your desk position                             |
-| getMap              | get the current map                                        |
-| getMaps             | returns all the maps for your environment                  |
-| getPlayers          | teleports your avatar in a selected space                  |
-| listMaps            | prints all the mpas                                        |
-| listPlayers         | teleports your avatar in a selected space                  |
-| position            | get the current position                                   |
-| setDesk             | save current position as desk position                     |
-| getMapsWithItemName | get maps containing object(s) with a certain name          |
-| shit                | go to a toilet on the current map                          |
-| teleport            | teleports your avatar in a selected space                  |
-| teleportToPlayer    | teleports your avatar in a selected space                  |
-| teleportToSpawn     | teleports your avatar to a selected space's spawn location |
-| shot                | teleports your avatar to an available seat at the big bar  |
+| function            | description                                                        |
+| ------------------- | ------------------------------------------------------------------ |
+| breakAnkles         | teleport around the map and break your coworker's ankles           |
+| desk                | teleport to your desk position                                     |
+| getMap              | get the current map                                                |
+| getMaps             | returns all the maps for your environment                          |
+| getPlayers          | gets currently online players                                      |
+| listMaps            | prints all the maps                                                |
+| listPlayers         | prints all online players                                          |
+| position            | get the current position                                           |
+| setDesk             | save current position as desk position                             |
+| getMapsWithItemName | get maps containing object(s) with a certain name                  |
+| shit                | teleports your avatar to a bathroom of your choice                 |
+| teleport            | teleports your avatar in a selected space                          |
+| teleportToPlayer    | teleports your avatar on top of a player                           |
+| teleportToSpawn     | teleports your avatar to a selected space's spawn location         |
+| shot                | teleports your avatar to an available seat at a bar of your choice |
 
 ### Details
 
@@ -165,13 +165,15 @@ setDesk()
 
 #### shit
 
-Go to the first toilet found on the current map.
-Displays an error message if no toilets are found.
-Note: the name of your custom toilet object must includet the word `Toilet` (case sensitive)
+Displays a prompt showing you the available maps with a bathroom/toilet.
+
+Displays another prompt asking you which toilet seat you will like to sit on.
+
+Note: Bars must include custom object toilets with the name `Toilet` (case-sensitive). Available toilets must not have a player sitting on it.
 
 ```
 /**
- * teleports you to the first toilet found
+ * teleports you to a toilet of your choice
  */
 shit()
 ```
@@ -228,6 +230,7 @@ Displays a prompt showing you the available maps with a bar.
 Displays another prompt asking you which seat at that bar you will like to sit on.
 
 Note: Bars must include custom object seats with the name `bar-stool` (case-sensitive). Available bar seats must not have a player sitting on it.
+
 ```
 /**
  * teleports you to the big bar at an available bar seat of your choice

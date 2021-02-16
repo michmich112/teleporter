@@ -196,18 +196,67 @@ function setDesk() {
 }
 
 /**
- * teleports the user to the first toilet found in the current room
+ * teleports the user to a toilet of their choice
  * NOTE: You must save your custom toilet object with the word Toilet in it
  */
 function shit() {
-  let toilets;
-  wrapper((gameSpace) => {
-    toilets = gameSpace.maps[gameSpace.mapId].objects.filter(o => (o._name || '').includes("Toilet"));
-  })
-  if (toilets.length < 1) {
-    console.error("No toilets found on the current map.");
+  const mapsWithToilets = getMapsWithItemName("Toilet");
+  const mapIdsWithIndexes = mapsWithToilets.map((m, idx) => `${idx}: ${m.id}`);
+  const selectedMapIdOrIndex = prompt(
+    `In which room would you like to go to the bathroom? Enter index or name. \nAvailable rooms:\n${mapIdsWithIndexes.join(
+      "\n"
+    )}`
+  );
+
+  // get map
+  const selectedMap =
+    mapsWithToilets[selectedMapIdOrIndex] ||
+    mapsWithToilets[
+      mapsWithToilets.findIndex(m => m.id === selectedMapIdOrIndex)
+    ];
+  if (!selectedMap) {
+    console.error("Your input is invalid.");
+    return;
   }
-  teleport(toilets[0].x, toilets[0].y)
+
+  // get toilets
+  const toilets = selectedMap.objects.filter(o =>
+    (o._name || "").includes("Toilet")
+  );
+  if (toilets.length < 1) {
+    console.error("Map doesn't have a bathroom.");
+  }
+
+  // get non-occupied toilets
+  const currentPlayersInMap = getPlayers().filter(
+    p => p.map === selectedMap.id
+  );
+  toilets.forEach((t, toiletSeatIndex) => {
+    const playerAtSeat = currentPlayersInMap.filter(
+      p => p.x === t.x && p.y === t.y
+    )[0];
+    toilets[toiletSeatIndex].occupied = playerAtSeat;
+  });
+  let availableToiletSeatsIndexes = [];
+  for (let i = 0; i < toilets.length; i++) {
+    if (!toilets[i].occupied) {
+      availableToiletSeatsIndexes.push(i + 1);
+    }
+  }
+  const selectedToiletSeatIndex = prompt(
+    `Which seat would you like to take?\nAvailable seats: ${availableToiletSeatsIndexes.join(
+      ", "
+    )}`
+  );
+  if (!toilets[selectedToiletSeatIndex - 1]) {
+    alert("Toilet isn't valid.");
+  } else {
+    teleport(
+      toilets[selectedToiletSeatIndex - 1].x,
+      toilets[selectedToiletSeatIndex - 1].y,
+      selectedMap.id
+    );
+  }
 }
 
 /*
