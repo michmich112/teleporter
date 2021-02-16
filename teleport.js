@@ -196,18 +196,67 @@ function setDesk() {
 }
 
 /**
- * teleports the user to the first toilet found in the current room
+ * teleports the user to a toilet of their choice
  * NOTE: You must save your custom toilet object with the word Toilet in it
  */
 function shit() {
-  let toilets;
-  wrapper((gameSpace) => {
-    toilets = gameSpace.maps[gameSpace.mapId].objects.filter(o => (o._name || '').includes("Toilet"));
-  })
-  if (toilets.length < 1) {
-    console.error("No toilets found on the current map.");
+  const mapsWithShitters = getMapsWithItemName("Toilet");
+  const mapIdsWithIndexes = mapsWithShitters.map((m, idx) => `${idx}: ${m.id}`);
+  const selectedMapIdOrIndex = prompt(
+    `In which room would you like to go to the bathroom? Enter index or name. \nAvailable rooms:\n${mapIdsWithIndexes.join(
+      "\n"
+    )}`
+  );
+
+  // get map
+  const selectedMap =
+    mapsWithShitters[selectedMapIdOrIndex] ||
+    mapsWithShitters[
+      mapsWithShitters.findIndex(m => m.id === selectedMapIdOrIndex)
+    ];
+  if (!selectedMap) {
+    console.error("Your input is invalid.");
+    return;
   }
-  teleport(toilets[0].x, toilets[0].y)
+
+  // get toilets
+  const shitters = selectedMap.objects.filter(o =>
+    (o._name || "").includes("Toilet")
+  );
+  if (shitters.length < 1) {
+    console.error("Map doesn't have a bathroom.");
+  }
+
+  // get non-occupied toilets
+  const currentPlayersInMap = getPlayers().filter(
+    p => p.map === selectedMap.id
+  );
+  shitters.forEach((s, shitterIndex) => {
+    const playerTakingAShit = currentPlayersInMap.filter(
+      p => p.x === s.x && p.y === s.y
+    )[0];
+    shitters[shitterIndex].occupied = playerTakingAShit;
+  });
+  let availableShitterIndexes = [];
+  for (let i = 0; i < shitters.length; i++) {
+    if (!shitters[i].occupied) {
+      availableShitterIndexes.push(i + 1);
+    }
+  }
+  const selectedShitterIndex = prompt(
+    `Which seat would you like to take?\nAvailable seats: ${availableShitterIndexes.join(
+      ", "
+    )}`
+  );
+  if (!shitters[selectedShitterIndex - 1]) {
+    alert("Toilet isn't valid.");
+  } else {
+    teleport(
+      shitters[selectedShitterIndex - 1].x,
+      shitters[selectedShitterIndex - 1].y,
+      selectedMap.id
+    );
+  }
 }
 
 /*
