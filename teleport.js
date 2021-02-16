@@ -141,12 +141,14 @@ function getMapsWithItemName(itemName) {
   let mapsWithItemName = [];
   wrapper((gameSpace) => {
     const mapKeys = Object.keys(gameSpace.maps);
-    const maps = gameSpace.maps;
-    mapKeys.forEach(key => {
-      if (maps[key].objects.filter(o => (o._name || '').includes(itemName)).length > 0) {
-        mapsWithItemName.push(gameSpace.maps[key]);
-      }
-    })
+    mapsWithItemName = mapKeys
+      .filter(
+        key =>
+          gameSpace.maps[key].objects.filter(o =>
+            (o._name || "").includes(itemName)
+          ).length > 0
+      )
+      .map(key => gameSpace.maps[key]);
   })
   return mapsWithItemName;
 }
