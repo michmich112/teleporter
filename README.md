@@ -12,26 +12,38 @@ Toggle the extension on and you are ready to go.
 
 In the console the following functions are available to you:
 
-| function         | description                                                |
-| ---------------- | ---------------------------------------------------------- |
-| breakAnkles      | teleport around the map and break your coworker's ankles   |
-| desk             | teleport to your desk position                             |
-| getMap           | get the current map                                        |
-| getMaps          | returns all the maps for your environment                  |
-| getPlayers       | teleports your avatar in a selected space                  |
-| listMaps         | prints all the mpas                                        |
-| listPlayers      | teleports your avatar in a selected space                  |
-| position         | get the current position                                   |
-| setDesk          | save current position as desk position                     |
-| shit             | go to a toilet on the current map                          |
-| teleport         | teleports your avatar in a selected space                  |
-| teleportToPlayer | teleports your avatar in a selected space                  |
-| teleportToSpawn  | teleports your avatar to a selected space's spawn location |
-| shot             | teleports your avatar to an available seat at the big bar  |
+| function            | description                                                |
+| ------------------- | ---------------------------------------------------------- |
+| breakAnkles         | teleport around the map and break your coworker's ankles   |
+| desk                | teleport to your desk position                             |
+| getMap              | get the current map                                        |
+| getMaps             | returns all the maps for your environment                  |
+| getPlayers          | teleports your avatar in a selected space                  |
+| listMaps            | prints all the mpas                                        |
+| listPlayers         | teleports your avatar in a selected space                  |
+| position            | get the current position                                   |
+| setDesk             | save current position as desk position                     |
+| getMapsWithItemName | get maps containing object(s) with a certain name          |
+| shit                | go to a toilet on the current map                          |
+| teleport            | teleports your avatar in a selected space                  |
+| teleportToPlayer    | teleports your avatar in a selected space                  |
+| teleportToSpawn     | teleports your avatar to a selected space's spawn location |
+| shot                | teleports your avatar to an available seat at the big bar  |
 
 ### Details
 
+#### getMapsWithItemName
+
+```
+/**
+ * gives you a list of map that contains a certain object name
+ * @param itemName: string: item name
+ */
+getMapsWithItemName("toilet")
+```
+
 #### breakAnkles
+
 ```
 /**
  * teleports n time around the map
@@ -45,6 +57,7 @@ breakAnkles(n, delay)
 
 Teleport to your desks position
 Note: must have set your desk's position beforehand using the `setDesk()` function.
+
 ```
 /**
  * teleport to your desk's position
@@ -139,8 +152,10 @@ position()
 ```
 
 #### setDesk
+
 Set your current position as your desks position.
 Note: you only need to set it once as it persists on local storage
+
 ```
 /**
  * Set your current position as your desks position
@@ -161,7 +176,9 @@ Note: the name of your custom toilet object must includet the word `Toilet` (cas
 shit()
 ```
 
-#### Teleport
+#### teleport
+
+Teleports you to a coordinate x,y on a map of your choice.
 
 ```
 /**
@@ -176,7 +193,9 @@ teleport(x, y, space)
 
 Note: You can only teleport yourself
 
-#### Teleport to player
+#### teleportToPlayer
+
+Teleports you on top of a player of your choice.
 
 ```
 /**
@@ -188,7 +207,9 @@ teleportToPlayer(name)
 
 Note: The player must be online
 
-#### Teleport to map's spawn location
+#### teleportToSpawn
+
+Teleports you to the first spawn location on a map of your choice.
 
 ```
 /**
@@ -200,12 +221,16 @@ teleportToSpawn(mapId)
 
 Note: The map ID must be valid
 
-#### Teleport to an available seat at the big bar
+#### shot
 
+Displays a prompt showing you the available maps with a bar.
+
+Displays another prompt asking you which seat at that bar you will like to sit on.
+
+Note: Bars must include custom object seats with the name `bar-stool` (case-sensitive). Available bar seats must not have a player sitting on it.
 ```
 /**
  * teleports you to the big bar at an available bar seat of your choice
  */
 shot()
 ```
-
