@@ -32,6 +32,16 @@ In the console the following functions are available to you:
 
 ### Details
 
+#### getMapsWithItemName
+
+```
+/**
+ * gives you a list of map that contains a certain object name
+ * @param itemName: string: item name
+ */
+getMapsWithItemName("toilet")
+```
+
 #### breakAnkles
 
 ```
@@ -166,7 +176,9 @@ Note: the name of your custom toilet object must includet the word `Toilet` (cas
 shit()
 ```
 
-#### Teleport
+#### teleport
+
+Teleports you to a coordinate x,y on a map of your choice.
 
 ```
 /**
@@ -181,7 +193,9 @@ teleport(x, y, space)
 
 Note: You can only teleport yourself
 
-#### Teleport to player
+#### teleportToPlayer
+
+Teleports you on top of a player of your choice.
 
 ```
 /**
@@ -193,7 +207,9 @@ teleportToPlayer(name)
 
 Note: The player must be online
 
-#### Teleport to map's spawn location
+#### teleportToSpawn
+
+Teleports you to the first spawn location on a map of your choice.
 
 ```
 /**
@@ -205,8 +221,13 @@ teleportToSpawn(mapId)
 
 Note: The map ID must be valid
 
-#### Teleport to an available seat at the big bar
+#### shot
 
+Displays a prompt showing you the available maps with a bar.
+
+Displays another prompt asking you which seat at that bar you will like to sit on.
+
+Note: Bars must include custom object seats with the name `bar-stool` (case-sensitive). Available bar seats must not have a player sitting on it.
 ```
 /**
  * teleports you to the big bar at an available bar seat of your choice
