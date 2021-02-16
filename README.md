@@ -15,14 +15,14 @@ In the console the following functions are available to you:
 | function         | description                                                |
 | ---------------- | ---------------------------------------------------------- |
 | breakAnkles      | teleport around the map and break your coworker's ankles   |
-| desk             | teleport to your desk poisition                            |
+| desk             | teleport to your desk position                             |
 | getMap           | get the current map                                        |
 | getMaps          | returns all the maps for your environment                  |
 | getPlayers       | teleports your avatar in a selected space                  |
 | listMaps         | prints all the mpas                                        |
 | listPlayers      | teleports your avatar in a selected space                  |
 | position         | get the current position                                   |
-| setDesk          | save current position as desk position                    |
+| setDesk          | save current position as desk position                     |
 | shit             | go to a toilet on the current map                          |
 | teleport         | teleports your avatar in a selected space                  |
 | teleportToPlayer | teleports your avatar in a selected space                  |
