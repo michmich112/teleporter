@@ -324,3 +324,34 @@ function shot() {
     );
   }
 }
+
+/*
+ * teleports you to a random dnd tile in the same room.
+ */
+function dnd() {
+  const DND_TILE_NAME = "dnd-tile";
+  let dndTiles;
+  let currentMapId;
+
+  wrapper(gameSpace => {
+    dndTiles = gameSpace.maps[gameSpace.mapId].objects.filter(o =>
+      (o._name || "").includes(DND_TILE_NAME)
+    );
+    currentMapId = gameSpace.mapId;
+  });
+  if (dndTiles.length < 1) {
+    console.error("No DND tiles found on current map.");
+    return;
+  }
+  const currentPlayersInRoom = getPlayers().filter(p => p.map === currentMapId);
+  dndTiles.forEach((t, tileIndex) => {
+    const playerOnTile = currentPlayersInRoom.filter(
+      p => p.x === t.x && p.y === t.y
+    )[0];
+    dndTiles[tileIndex].occupied = playerOnTile;
+  });
+  const availableDNDTiles = dndTiles.filter(t => !t.occupied);
+  const randomDNDTile =
+    dndTiles[Math.floor(Math.random() * availableDNDTiles.length + 1)];
+  teleport(randomDNDTile.x, randomDNDTile.y, currentMapId);
+}

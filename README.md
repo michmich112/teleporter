@@ -29,6 +29,7 @@ In the console the following functions are available to you:
 | teleportToPlayer    | teleports your avatar on top of a player                           |
 | teleportToSpawn     | teleports your avatar to a selected space's spawn location         |
 | shot                | teleports your avatar to an available seat at a bar of your choice |
+| dnd                 | teleports your avatar to an available do-not-disturb tile          |
 
 ### Details
 
@@ -236,4 +237,17 @@ Note: Bars must include custom object seats with the name `bar-stool` (case-sens
  * teleports you to the big bar at an available bar seat of your choice
  */
 shot()
+```
+
+#### dnd
+
+Teleports you to a random available do-not-disturb tile in the same room.
+
+Note: Do not disturb zones must include custom objects with the name `dnd-tile` (case-sensitive). Available tiles must not have a player on it.
+
+```
+/**
+ * teleports you to a random dnd tile.
+ */
+dnd()
 ```
