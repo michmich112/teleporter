@@ -30,8 +30,20 @@ In the console the following functions are available to you:
 | teleportToSpawn     | teleports your avatar to a selected space's spawn location         |
 | shot                | teleports your avatar to an available seat at a bar of your choice |
 | dnd                 | teleports your avatar to an available do-not-disturb tile          |
+| ghost               | activates ghost mode until g is pressed.                           |
 
 ### Details
+
+#### ghost
+
+Activates ghost mode until 'g' is pressed.
+
+```
+/**
+ * activates ghost mode
+ */
+ghost()
+```
 
 #### getMapsWithItemName
 
@@ -241,7 +253,7 @@ shot()
 
 #### dnd
 
-Teleports you to a random available do-not-disturb tile in the same room.
+Teleports you to a random available do-not-disturb tile in the same room and activates ghost mode.
 
 Note: Do not disturb zones must include custom objects with the name `dnd-tile` (case-sensitive). Available tiles must not have a player on it.
 
