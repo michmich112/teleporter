@@ -14,5 +14,5 @@ setTimeout(() => {
       doc.childNodes.find(cn => cn.innerText === TeleportButtonText).addEventListener('click', ()=> teleportToPlayer(name))
     }
   }
-}, 200)
+}, 100)
 })
