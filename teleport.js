@@ -105,11 +105,31 @@ function listMaps() {
   console.table(getMaps())
 }
 
+/**
+ * get your player information
+ */
+function getPlayer() {
+  let player
+  wrapper((gameSpace) => {
+    const p = gameSpace.gameState[gameSpace.id]
+    player = {
+      id: gameSpace.id,
+      name: p.name,
+      emojiStatus: p.emojiStatus,
+      map: p.map,
+      x: p.x,
+      y: p.y,
+    }
+  })
+  return player
+}
+
 /* returns an array of players online
  * [
  *   {
  *      id: <player id>
  *      name: <player name>
+ *      emojiStatus: <players emojiStatus if available
  *      map: <player current map name>
  *      x: <position X>
  *      y: <position Y>
@@ -125,6 +145,7 @@ function getPlayers() {
         return {
           id,
           name: p.name,
+          emojiStatus: p.emojiStatus,
           map: p.map,
           x: p.x,
           y: p.y,
@@ -165,7 +186,7 @@ function ghost() {
  */
 function teleportToPlayer(name) {
   const players = getPlayers()
-  const selectedPlayer = players.find(p => p.id === name) || players.find(p => p.name === name)
+  const selectedPlayer = players.find(p => p.id === name) || players.find(p => p.name === name) || players.find(p => `${p.name} ${p.emojiStatus}` === name)
   if (!selectedPlayer) console.error(`Cannot find player ${name}`)
   teleport(selectedPlayer.x, selectedPlayer.y, selectedPlayer.map)
 }

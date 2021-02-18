@@ -18,6 +18,7 @@ In the console the following functions are available to you:
 | desk                | teleport to your desk position                                     |
 | getMap              | get the current map                                                |
 | getMaps             | returns all the maps for your environment                          |
+| getPlayer           | retruns the information of the current player                      |
 | getPlayers          | gets currently online players                                      |
 | listMaps            | prints all the maps                                                |
 | listPlayers         | prints all online players                                          |
@@ -108,6 +109,25 @@ returns:
 }
 ```
 
+#### getPlayer
+```
+/**
+ * Returns information about the current player
+ */
+getPlayer()
+```
+Returns:
+```
+{
+  id: <player id>
+  name: <player name>
+  map: <player current map name>
+  emojiStatus: <player's emojiStatus if applicable>
+  x: <position X>
+  y: <position Y>
+}
+```
+
 #### getPlayers
 
 ```
@@ -125,6 +145,7 @@ returns:
     id: <player id>
     name: <player name>
     map: <player current map name>
+    emojiStatus: <player's emojiStatus if applicable>
     x: <position X>
     y: <position Y>
   }
