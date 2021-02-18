@@ -153,6 +153,13 @@ function getMapsWithItemName(itemName) {
   return mapsWithItemName;
 }
 
+/*
+ * activates ghost mode until g is pressed.
+ */
+function ghost() {
+  document.body.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'g' }))
+}
+
 /**
  * teleports the user to the players name or id if it exists
  */
@@ -354,4 +361,5 @@ function dnd() {
   const randomDNDTile =
     dndTiles[Math.floor(Math.random() * availableDNDTiles.length + 1)];
   teleport(randomDNDTile.x, randomDNDTile.y, currentMapId);
+  ghost();
 }
