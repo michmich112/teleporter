@@ -105,11 +105,31 @@ function listMaps() {
   console.table(getMaps())
 }
 
+/**
+ * get your player information
+ */
+function getPlayer() {
+  let player
+  wrapper((gameSpace) => {
+    const p = gameSpace.gameState[gameSpace.id]
+    player = {
+      id: gameSpace.id,
+      name: p.name,
+      emojiStatus: p.emojiStatus,
+      map: p.map,
+      x: p.x,
+      y: p.y,
+    }
+  })
+  return player
+}
+
 /* returns an array of players online
  * [
  *   {
  *      id: <player id>
  *      name: <player name>
+ *      emojiStatus: <players emojiStatus if available
  *      map: <player current map name>
  *      x: <position X>
  *      y: <position Y>
