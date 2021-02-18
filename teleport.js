@@ -186,7 +186,6 @@ function ghost() {
  */
 function teleportToPlayer(name) {
   const players = getPlayers()
-  console.log(players)
   const selectedPlayer = players.find(p => p.id === name) || players.find(p => p.name === name) || players.find(p => `${p.name} ${p.emojiStatus}` === name)
   if (!selectedPlayer) console.error(`Cannot find player ${name}`)
   teleport(selectedPlayer.x, selectedPlayer.y, selectedPlayer.map)
