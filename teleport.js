@@ -380,7 +380,7 @@ function dnd() {
   });
   const availableDNDTiles = dndTiles.filter(t => !t.occupied);
   const randomDNDTile =
-    dndTiles[Math.floor(Math.random() * availableDNDTiles.length + 1)];
+    availableDNDTiles[Math.floor(Math.random() * availableDNDTiles.length + 1)];
   teleport(randomDNDTile.x, randomDNDTile.y, currentMapId);
   ghost();
 }
