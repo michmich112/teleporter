@@ -32,8 +32,23 @@ In the console the following functions are available to you:
 | shot                | teleports your avatar to an available seat at a bar of your choice |
 | dnd                 | teleports your avatar to an available do-not-disturb tile          |
 | ghost               | activates ghost mode until g is pressed.                           |
+| changeSong          | changes the video URL and start sync time for the jukebox          |
 
 ### Details
+
+#### changeSong
+
+Updates the video URL and the starting sync time for an object with the name "jukebox".
+If no URL is provided, then jukebox video URL will not be updated.
+If no playStartHours, playStartMinutes or playStartSeconds, then starting sync time will be updated to now.
+
+```
+/*
+ * update jukebox song
+ * requires object with jukebox (case-sensitive) as a name
+ */
+ changeSong(songURL, playStartHours, playStartMinutes, playStartSeconds)
+```
 
 #### ghost
 

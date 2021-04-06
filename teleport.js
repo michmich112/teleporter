@@ -384,3 +384,52 @@ function dnd() {
   teleport(randomDNDTile.x, randomDNDTile.y, currentMapId);
   ghost();
 }
+
+/*
+ * update jukebox song
+ * requires object with jukebox (case-sensitive) as a name
+ */
+function changeSong(
+  songURL,
+  playStartHours,
+  playStartMinutes,
+  playStartSeconds
+) {
+  const JUKEBOX_NAME = "jukebox";
+  let jukebox;
+  let songToPlay;
+  let timeToStartPlayingInSeconds;
+
+  wrapper(gameSpace => {
+    jukebox = gameSpace.maps[gameSpace.mapId].objects.filter(o =>
+      (o._name || "").includes(JUKEBOX_NAME)
+    )[0];
+  });
+
+  if (!jukebox || jukebox.length === 0) {
+    console.error("There are no public jukeboxes in this map!")
+    return;
+  }
+
+  if (!songURL) {
+    songToPlay = jukebox.properties.video;
+  } else {
+    songToPlay = songURL;
+  }
+
+  if (!playStartHours || !playStartMinutes || !playStartSeconds) {
+    timeToStartPlayingInSeconds = new Date().getTime() / 1000; // now
+  } else {
+    const timeToStartPlaying = new Date();
+    timeToStartPlaying.setHours(
+      playStartHours,
+      playStartMinutes,
+      playStartSeconds
+    );
+    timeToStartPlayingInSeconds = timeToStartPlaying.getTime() / 1000;
+  }
+
+  jukebox.properties.video = songToPlay;
+  jukebox.properties.startTime._seconds = timeToStartPlayingInSeconds;
+  jukebox.objectStartTime._seconds = timeToStartPlayingInSeconds;
+}
