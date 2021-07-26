@@ -1,6 +1,7 @@
 # Teleporter
 
-A gather.town teleporter extension which gives the possibility to users to use special commands in the console.
+A gather.town teleporter extension which gives the possibility to users to use special commands in the console.\
+Some features may be deprecated with Gather town updates. c.f. https://gathertown.canny.io/changelog
 
 ## Installation
 
