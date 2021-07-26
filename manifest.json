@@ -5,7 +5,8 @@
 	"content_scripts": [
 		{
 			"matches":[
-				"*://gather.town/*"
+				"*://gather.town/*",
+				"*://staging.gather.town/*"
 			],
 			"js": ["inject.js"],
 			"all_frames": true
