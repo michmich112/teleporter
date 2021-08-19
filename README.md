@@ -5,8 +5,7 @@ Some features may be deprecated with Gather town updates. c.f. https://gathertow
 
 ## Installation
 
-Copy or clone the repo, then open chrome and go to [chrome://extensions/](chrome://extensions/) which will bring you to the extension manager page.
-On the extension manager, go to the upper left corner to `Load Unpacked`, click on it, then select the repo on your local system.
+Copy or clone the repo, then open chrome and go to [chrome://extensions/](chrome://extensions/) which will bring you to the extension manager page. Set your extensions as `Developer mode`, which can be enabled in the upper right corner. On the extension manager, go to the upper left corner to `Load Unpacked`, click on it, then select the repo on your local system.
 Toggle the extension on and you are ready to go.
 
 ## Usage
@@ -32,6 +31,8 @@ In the console the following functions are available to you:
 | teleportToSpawn     | teleports your avatar to a selected space's spawn location         |
 | shot                | teleports your avatar to an available seat at a bar of your choice |
 | dnd                 | teleports your avatar to an available do-not-disturb tile          |
+| findPlayer          | find a player by its name or id                                    |
+| ring                | ring a player by name                                              |
 | ghost               | activates ghost mode until g is pressed.                           |
 | changeSong          | changes the video URL and start sync time for the jukebox          |
 
@@ -299,4 +300,30 @@ Note: Do not disturb zones must include custom objects with the name `dnd-tile` 
  * teleports you to a random dnd tile.
  */
 dnd()
+```
+
+
+
+#### findPlayer
+
+Will find a specific player by name or id.
+
+```
+/**
+ * Find a specific user
+ */
+findPlayer(filter)
+```
+
+
+
+#### ring
+
+Ring a user by its name.
+
+```
+/**
+ * Ring a user
+ */
+ring(name)
 ```
