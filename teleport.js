@@ -403,6 +403,19 @@ function ring(name) {
   })
 }
 
+/**
+ * Make some one come to you.
+ * Still needs to cancel the move of the player that is calling joinMe.
+ */
+ function joinMe(name) {
+  const player = findPlayer(name)
+  wrapper((gameSpace) => {
+    gameSpace.whisper(player.id)
+
+    // need to cancel your player move.
+  })
+}
+
 /*
  * update jukebox song
  * requires object with jukebox (case-sensitive) as a name
