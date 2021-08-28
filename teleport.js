@@ -185,9 +185,7 @@ function ghost() {
  * teleports the user to the players name or id if it exists
  */
 function teleportToPlayer(name) {
-  const players = getPlayers()
-  const selectedPlayer = players.find(p => p.id === name) || players.find(p => p.name === name) || players.find(p => `${p.name} ${p.emojiStatus}` === name)
-  if (!selectedPlayer) console.error(`Cannot find player ${name}`)
+  const selectedPlayer = findPlayer(name)
   teleport(selectedPlayer.x, selectedPlayer.y, selectedPlayer.map)
 }
 
@@ -383,6 +381,39 @@ function dnd() {
     availableDNDTiles[Math.floor(Math.random() * availableDNDTiles.length + 1)];
   teleport(randomDNDTile.x, randomDNDTile.y, currentMapId);
   ghost();
+}
+
+/**
+ * Find a specific user
+ */
+function findPlayer(filter) {
+  const players = getPlayers()
+  const selectedPlayer = players.find(p => p.id === filter) || players.find(p => p.name === filter) || players.find(p => `${p.name} ${p.emojiStatus}` === filter)
+  if (!selectedPlayer) console.error(`Cannot find player ${filter}`)
+  return selectedPlayer 
+}
+
+/**
+ * Ring a user 
+ */
+function ring(name) {
+  const player = findPlayer(name)
+  wrapper((gameSpace) => {
+    gameSpace.ringUser(player.id)
+  })
+}
+
+/**
+ * Make some one come to you.
+ * Still needs to cancel the move of the player that is calling joinMe.
+ */
+ function joinMe(name) {
+  const player = findPlayer(name)
+  wrapper((gameSpace) => {
+    gameSpace.whisper(player.id)
+
+    // need to cancel your player move.
+  })
 }
 
 /*
