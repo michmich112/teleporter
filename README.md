@@ -20,6 +20,7 @@ In the console the following functions are available to you:
 | getMaps             | returns all the maps for your environment                          |
 | getPlayer           | retruns the information of the current player                      |
 | getPlayers          | gets currently online players                                      |
+| joinMe              | whisper to any player on the map (will move the player)            |
 | listMaps            | prints all the maps                                                |
 | listPlayers         | prints all online players                                          |
 | position            | get the current position                                           |
@@ -44,7 +45,7 @@ Updates the video URL and the starting sync time for an object with the name "ju
 If no URL is provided, then jukebox video URL will not be updated.
 If no playStartHours, playStartMinutes or playStartSeconds, then starting sync time will be updated to now.
 
-```
+```javascript
 /*
  * update jukebox song
  * requires object with jukebox (case-sensitive) as a name
@@ -56,7 +57,7 @@ If no playStartHours, playStartMinutes or playStartSeconds, then starting sync t
 
 Activates ghost mode until 'g' is pressed.
 
-```
+```javascript
 /**
  * activates ghost mode
  */
@@ -65,7 +66,7 @@ ghost()
 
 #### getMapsWithItemName
 
-```
+```javascript
 /**
  * gives you a list of map that contains a certain object name
  * @param itemName: string: item name
@@ -75,7 +76,7 @@ getMapsWithItemName("toilet")
 
 #### breakAnkles
 
-```
+```javascript
 /**
  * teleports n time around the map
  * @param n: number : number of time to teleport around the map
@@ -89,7 +90,7 @@ breakAnkles(n, delay)
 Teleport to your desks position
 Note: must have set your desk's position beforehand using the `setDesk()` function.
 
-```
+```javascript
 /**
  * teleport to your desk's position
  */
@@ -98,7 +99,7 @@ desk()
 
 #### getMap
 
-```
+```javascript
 /**
  * returns the current map id
  */
@@ -107,7 +108,7 @@ getMap()
 
 #### getMaps
 
-```
+```javascript
 /**
  * returns all the maps and their x and y dimensions
  */
@@ -116,7 +117,7 @@ getMap()
 
 returns:
 
-```
+```javascript
 {
   "<mapId>": {
     id: "<mapId>",
@@ -127,14 +128,14 @@ returns:
 ```
 
 #### getPlayer
-```
+```javascript
 /**
  * Returns information about the current player
  */
 getPlayer()
 ```
 Returns:
-```
+```javascript
 {
   id: <player id>
   name: <player name>
@@ -147,7 +148,7 @@ Returns:
 
 #### getPlayers
 
-```
+```javascript
 /**
  * returns an array of players online
  */
@@ -156,7 +157,7 @@ Returns:
 
 returns:
 
-```
+```javascript
 [
   {
     id: <player id>
@@ -169,11 +170,21 @@ returns:
 ]
 ```
 
+#### joinMe
+```javascript
+/**
+ * Make some one come to you.
+ * Still needs to cancel the move of the player that is calling joinMe.
+ * @param name: string: user's name
+ */
+ function joinMe(name)
+```
+
 #### listMaps
 
 Lists all the maps and their dimensions to the console
 
-```
+```javascript
 /**
  * Lists all the maps and their dimensions to the console
  */
@@ -184,7 +195,7 @@ getMaps()
 
 Lists online players to the console
 
-```
+```javascript
 /**
  * Lists online players to the console
  */
@@ -195,7 +206,7 @@ listPlayers()
 
 Get the current position
 
-```
+```javascript
 /**
  * Get the current poisition and map Id
  */
@@ -207,7 +218,7 @@ position()
 Set your current position as your desks position.
 Note: you only need to set it once as it persists on local storage
 
-```
+```javascript
 /**
  * Set your current position as your desks position
  */
@@ -222,7 +233,7 @@ Displays another prompt asking you which toilet seat you will like to sit on.
 
 Note: Bars must include custom object toilets with the name `Toilet` (case-sensitive). Available toilets must not have a player sitting on it.
 
-```
+```javascript
 /**
  * teleports you to a toilet of your choice
  */
@@ -233,7 +244,7 @@ shit()
 
 Teleports you to a coordinate x,y on a map of your choice.
 
-```
+```javascript
 /**
  * teleports you to anywhere in gather
  * @param x {int}         : x position to teleport to on the space
@@ -250,7 +261,7 @@ Note: You can only teleport yourself
 
 Teleports you on top of a player of your choice.
 
-```
+```javascript
 /**
  * teleports you to an online player
  * @param name {string}         : the name or the id of the player you want to teleport to
@@ -264,7 +275,7 @@ Note: The player must be online
 
 Teleports you to the first spawn location on a map of your choice.
 
-```
+```javascript
 /**
  * teleports you to a map's spawn location
  * @param mapId {string}         : the id of the map you want to teleport to
@@ -282,7 +293,7 @@ Displays another prompt asking you which seat at that bar you will like to sit o
 
 Note: Bars must include custom object seats with the name `bar-stool` (case-sensitive). Available bar seats must not have a player sitting on it.
 
-```
+```javascript
 /**
  * teleports you to the big bar at an available bar seat of your choice
  */
@@ -295,7 +306,7 @@ Teleports you to a random available do-not-disturb tile in the same room and act
 
 Note: Do not disturb zones must include custom objects with the name `dnd-tile` (case-sensitive). Available tiles must not have a player on it.
 
-```
+```javascript
 /**
  * teleports you to a random dnd tile.
  */
@@ -308,7 +319,7 @@ dnd()
 
 Will find a specific player by name or id.
 
-```
+```javascript
 /**
  * Find a specific user
  */
@@ -321,7 +332,7 @@ findPlayer(filter)
 
 Ring a user by its name.
 
-```
+```javascript
 /**
  * Ring a user
  */
