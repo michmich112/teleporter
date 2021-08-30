@@ -3,8 +3,8 @@
  */
 function wrapper(fn) {
   const tmp = gameSpace.__proto__.keyE
-  gameSpace.__proto__.keyE=function(){fn(this)}
-  document.body.dispatchEvent(new KeyboardEvent('keydown', {'key': 'e'}))
+  gameSpace.__proto__.keyE = function() { fn(this) }
+  document.body.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'e' }))
   gameSpace.__proto__.keyE = tmp
 }
 
@@ -16,11 +16,11 @@ function wrapper(fn) {
 function breakAnkles(n, delay) {
   let dim // dimensions of the current map
   wrapper(gameSpace => {
-    [x,y] = gameSpace.maps[gameSpace.mapId].dimensions
-    dim = {x,y}
+    [x, y] = gameSpace.maps[gameSpace.mapId].dimensions
+    dim = { x, y }
   })
-  for (let i=0; i<n; i++) {
-    setTimeout(()=>teleport(Math.round(Math.random()*dim.x), Math.round(Math.random()*dim.y)), (delay ?? 690)*i)
+  for (let i = 0; i < n; i++) {
+    setTimeout(() => teleport(Math.round(Math.random() * dim.x), Math.round(Math.random() * dim.y)), (delay ?? 690) * i)
   }
 }
 
@@ -29,8 +29,8 @@ function breakAnkles(n, delay) {
  */
 function teleport(x, y, space) {
   wrapper((gameSpace) => {
-    if(!space) space = gameSpace.mapId || undefined; // set space to current space if undefined
-    gameSpace.teleport(x,y,space)
+    if (!space) space = gameSpace.mapId || undefined; // set space to current space if undefined
+    gameSpace.teleport(x, y, space)
   })
 }
 
@@ -40,11 +40,11 @@ function teleport(x, y, space) {
  */
 function desk() {
   const desk = window.localStorage.getItem("desk")
-  if(!desk){
+  if (!desk) {
     console.error("Desk not set use the setDesk() function")
     return
   }
-  const {x, y, mapId}= JSON.parse(desk);
+  const { x, y, mapId } = JSON.parse(desk);
   teleport(x, y, mapId)
 }
 
@@ -59,8 +59,8 @@ function desk() {
 function position() {
   let position
   wrapper((gameSpace) => {
-    const {x,y} = gameSpace.gameState[gameSpace.id]
-    position = {x, y, mapId: gameSpace.mapId}
+    const { x, y } = gameSpace.gameState[gameSpace.id]
+    position = { x, y, mapId: gameSpace.mapId }
   })
   return position
 }
@@ -92,8 +92,8 @@ function getMaps() {
     maps = gameSpace.maps
   })
   maps = Object.values(maps)
-      .map(m=>({id:m.id, sizeX: m.dimensions[0], sizeY: m.dimensions[1]}))
-      .reduce((acc,cur)=>({...acc,[cur.id]:cur}),{})
+    .map(m => ({ id: m.id, sizeX: m.dimensions[0], sizeY: m.dimensions[1] }))
+    .reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
   return maps
 }
 
@@ -215,7 +215,7 @@ function listPlayers() {
 
 /**
  * Set your desk location to your current position
- */ 
+ */
 function setDesk() {
   const pos = position()
   window.localStorage.setItem("desk", JSON.stringify(pos))
@@ -238,7 +238,7 @@ function shit() {
   const selectedMap =
     mapsWithShitters[selectedMapIdOrIndex] ||
     mapsWithShitters[
-      mapsWithShitters.findIndex(m => m.id === selectedMapIdOrIndex)
+    mapsWithShitters.findIndex(m => m.id === selectedMapIdOrIndex)
     ];
   if (!selectedMap) {
     console.error("Your input is invalid.");
@@ -303,7 +303,7 @@ function shot() {
   const selectedMap =
     mapsWithBarStools[selectedMapIdOrIndex] ||
     mapsWithBarStools[
-      mapsWithBarStools.findIndex(m => m.id === selectedMapIdOrIndex)
+    mapsWithBarStools.findIndex(m => m.id === selectedMapIdOrIndex)
     ];
   if (!selectedMap) {
     console.error("Your input is invalid.");
@@ -388,9 +388,12 @@ function dnd() {
  */
 function findPlayer(filter) {
   const players = getPlayers()
-  const selectedPlayer = players.find(p => p.id === filter) || players.find(p => p.name === filter) || players.find(p => `${p.name} ${p.emojiStatus}` === filter)
+  const selectedPlayer = players.find(p => {
+    normalize = (w) => w.toLowerCase().replace(' ', '');
+    return [p.id, p.name, `${p.name} ${p.emojiStatus}`].map(normalize).includes(normalize(filter));
+  })
   if (!selectedPlayer) console.error(`Cannot find player ${filter}`)
-  return selectedPlayer 
+  return selectedPlayer
 }
 
 /**
@@ -407,7 +410,7 @@ function ring(name) {
  * Make some one come to you.
  * Still needs to cancel the move of the player that is calling joinMe.
  */
- function joinMe(name) {
+function joinMe(name) {
   const player = findPlayer(name)
   wrapper((gameSpace) => {
     gameSpace.whisper(player.id)
