@@ -1,11 +1,9 @@
 /**
  * wrapper to cleanly inject the code and pass the gameSpace context to the developer
+ * we keep the wrapper for future breaking updates
  */
 function wrapper(fn) {
-  const tmp = gameSpace.__proto__.keyE
-  gameSpace.__proto__.keyE = function() { fn(this) }
-  document.body.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'e' }))
-  gameSpace.__proto__.keyE = tmp
+  fn(gameSpace);
 }
 
 /**
