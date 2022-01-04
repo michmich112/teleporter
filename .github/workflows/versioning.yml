@@ -5,8 +5,6 @@ on:
     branches:
       - master
   workflow_dispatch:
-    branches:
-      - master
 
 jobs:
   bump-version:
@@ -19,7 +17,7 @@ jobs:
           node-version: '12'
 
       - name: Bump Version
-        uses: michmich112/version-bumper@v1.0.5
+        uses: michmich112/version-bumper@master
         with:
           options-file: "./versioning-conf.json"
           github-token: ${{ secrets.GITHUB_TOKEN }}
