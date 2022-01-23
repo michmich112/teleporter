@@ -28,7 +28,7 @@ function breakAnkles(n, delay) {
 function teleport(x, y, space) {
   wrapper((gameSpace) => {
     if (!space) space = gameSpace.mapId || undefined; // set space to current space if undefined
-    gameSpace.teleport(x, y, space)
+    game.teleport(space, x, y)
   })
 }
 
@@ -410,11 +410,9 @@ function ring(name) {
  */
 function joinMe(name) {
   const player = findPlayer(name)
-  wrapper((gameSpace) => {
-    gameSpace.whisper(player.id)
+  game.enterWhisper(player.id)
 
-    // need to cancel your player move.
-  })
+  // need to cancel your player move.
 }
 
 /*
