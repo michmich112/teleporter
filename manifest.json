@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Teleporter",
-	"version": "0.2.11",
+	"version": "0.2.12",
 	"content_scripts": [
 		{
 			"matches":[
