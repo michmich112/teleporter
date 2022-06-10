@@ -14,7 +14,7 @@ function wrapper(fn) {
 function breakAnkles(n, delay) {
   let dim // dimensions of the current map
   wrapper(gameSpace => {
-    [x, y] = gameSpace.maps[gameSpace.mapId].dimensions
+    [x, y] = gameSpace.mapState[gameSpace.mapId].dimensions
     dim = { x, y }
   })
   for (let i = 0; i < n; i++) {
@@ -87,7 +87,7 @@ function getMap() {
 function getMaps() {
   let maps
   wrapper((gameSpace) => {
-    maps = gameSpace.maps
+    maps = gameSpace.mapState
   })
   maps = Object.values(maps)
     .map(m => ({ id: m.id, sizeX: m.dimensions[0], sizeY: m.dimensions[1] }))
@@ -159,15 +159,15 @@ function getPlayers() {
 function getMapsWithItemName(itemName) {
   let mapsWithItemName = [];
   wrapper((gameSpace) => {
-    const mapKeys = Object.keys(gameSpace.maps);
+    const mapKeys = Object.keys(gameSpace.mapState);
     mapsWithItemName = mapKeys
       .filter(
         key =>
-          gameSpace.maps[key].objects.filter(o =>
+          Object.values(gameSpace.mapState[key].objects).filter(o =>
             (o._name || "").includes(itemName)
           ).length > 0
       )
-      .map(key => gameSpace.maps[key]);
+      .map(key => gameSpace.mapState[key]);
   })
   return mapsWithItemName;
 }
@@ -176,7 +176,7 @@ function getMapsWithItemName(itemName) {
  * activates ghost mode until g is pressed.
  */
 function ghost() {
-  document.body.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'g' }))
+  game.ghost(1)
 }
 
 /**
@@ -193,7 +193,7 @@ function teleportToPlayer(name) {
 function teleportToSpawn(mapId) {
   let maps = []
   wrapper((gameSpace) => {
-    maps = gameSpace.maps
+    maps = gameSpace.mapState
     const selectedMap = maps[mapId]
     if (!selectedMap) {
       console.error(`Cannot find map with id ${mapId}`)
@@ -358,7 +358,7 @@ function dnd() {
   let currentMapId;
 
   wrapper(gameSpace => {
-    dndTiles = gameSpace.maps[gameSpace.mapId].objects.filter(o =>
+    dndTiles = Object.values(gameSpace.mapState[gameSpace.mapId].objects).filter(o =>
       (o._name || "").includes(DND_TILE_NAME)
     );
     currentMapId = gameSpace.mapId;
@@ -431,7 +431,7 @@ function changeSong(
   let timeToStartPlayingInSeconds;
 
   wrapper(gameSpace => {
-    jukebox = gameSpace.maps[gameSpace.mapId].objects.filter(o =>
+    jukebox = gameSpace.mapState[gameSpace.mapId].objects.filter(o =>
       (o._name || "").includes(JUKEBOX_NAME)
     )[0];
   });
