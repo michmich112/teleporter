@@ -5,8 +5,21 @@ Some features may be deprecated with Gather town updates. c.f. https://gathertow
 
 ## Installation
 
+> **Warning**
+> Note: With Chrome blocking the use of extensions using Manifest V2, the instructions below will not work. To still use the benefits of this extension use the instructions under the **Install Errors** section
+
 Copy or clone the repo, then open chrome and go to [chrome://extensions/](chrome://extensions/) which will bring you to the extension manager page. Set your extensions as `Developer mode`, which can be enabled in the upper right corner. On the extension manager, go to the upper left corner to `Load Unpacked`, click on it, then select the repo on your local system.
 Toggle the extension on and you are ready to go.
+
+### Install Errors
+If you encounter errors when installing, this may be due to Chromes migration away from Manifest V2. 
+We currently have an issue open to migrate this extension to Manifest V3 (#24) but until then, please use the following workaround:
+
+1. Copy the contents from [teleport.js](https://github.com/michmich112/teleporter/blob/master/teleport.js)
+2. On your Gathertown tab, open the dev-tools (`F12`)
+3. Go to the `console` tool, in your browser's dev-tools 
+4. Paste the content you copied into the `console` tool and press `Enter`
+5. You're good to go!
 
 ## Usage
 
